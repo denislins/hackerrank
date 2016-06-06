@@ -5,7 +5,7 @@ var Challenge = require('../lib/challenge');
 class LisasWorkbook extends Challenge {
 
   static execute(chapters, maxProblems, problemsPerChapter) {
-    return arguments;
+
   }
 
   static parseInput() {
