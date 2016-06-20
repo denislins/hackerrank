@@ -1,11 +1,32 @@
 'use strict';
 
-var Challenge = require('../lib/challenge');
+const Challenge = require('../lib/challenge');
 
 class LisasWorkbook extends Challenge {
 
   static execute(chapters, maxProblems, problemsPerChapter) {
+    let [pages, specials] = [0, 0];
 
+    for (const p of problemsPerChapter) {
+      let problems = 0;
+
+      while (problems !== p) {
+        pages++;
+
+        const firstProblem = problems + 1;
+        problems += maxProblems;
+
+        if (problems > p) {
+          problems -= maxProblems - p % maxProblems;
+        }
+
+        if (firstProblem <= pages && pages <= problems) {
+          specials++;
+        }
+      }
+    }
+
+    return specials;
   }
 
   static parseInput() {
@@ -14,10 +35,5 @@ class LisasWorkbook extends Challenge {
   }
 
 }
-
-var callback = LisasWorkbook.executeCli();
-
-callback('5 3 ');
-callback(' 4 2 6 1 10');
 
 module.exports = LisasWorkbook;
