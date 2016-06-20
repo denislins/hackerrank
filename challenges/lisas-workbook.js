@@ -1,8 +1,6 @@
 'use strict';
 
-const Challenge = require('../lib/challenge');
-
-class LisasWorkbook extends Challenge {
+class LisasWorkbook {
 
   static execute(chapters, maxProblems, problemsPerChapter) {
     let [pages, specials] = [0, 0];
@@ -29,9 +27,16 @@ class LisasWorkbook extends Challenge {
     return specials;
   }
 
-  static parseInput() {
-    const [chapters, maxProblems] = this.input[0];
-    return this.execute(chapters, maxProblems, this.input[1]);
+  static executeCli(input) {
+    const parsedInput = this.parseInput(input);
+    const [chapters, maxProblems] = parsedInput[0];
+    console.log(this.execute(chapters, maxProblems, parsedInput[1]));
+  }
+
+  static parseInput(input) {
+    return input.split("\n").map(function(line) {
+      return line.trim().split(' ').map(s => parseInt(s, 10));
+    });
   }
 
 }
